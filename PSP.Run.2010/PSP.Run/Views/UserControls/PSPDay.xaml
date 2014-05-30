@@ -1,0 +1,90 @@
+﻿<UserControl x:Class="PSP.Run.Views.UserControls.PSPDay" xmlns:nsUserControls="clr-namespace:PSP.Run.Views.UserControls"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Height="Auto" MinHeight="400" Width="Auto" MinWidth="600" xmlns:my="http://schemas.microsoft.com/wpf/2008/toolkit">
+    <UserControl.Resources>
+        <Storyboard x:Key="sbEventNewCollapse">
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="ecNew" Storyboard.TargetProperty="Height">
+                <SplineDoubleKeyFrame KeyTime="00:00:01" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="sbEventNewVisible">
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="ecNew" Storyboard.TargetProperty="Height">
+                <SplineDoubleKeyFrame KeyTime="00:00:01" Value="60"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="sbEventNewItemVisible">
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetProperty="Height">
+                <SplineDoubleKeyFrame KeyTime="00:00:01" Value="60"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+    </UserControl.Resources>
+    
+    <DockPanel  Grid.Column="1" Margin="0">
+        <Expander x:Name="expandPSPDay" IsExpanded="True" DockPanel.Dock="Top" Expanded="Expander_Expanded">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30" />
+                    <RowDefinition Height="64" />
+                    <RowDefinition Height="30" />
+                    <RowDefinition Height="35" />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+
+                <TextBlock Grid.Row="0">
+                    <Bold>1..</Bold><Run Foreground="Gray">记录刚刚做过的事情，或者添加标签，或者两者都进行。</Run>
+                    <Bold>2..</Bold><Run Foreground="Gray">请设置所属模块，以便更好地进行统计。</Run>
+                </TextBlock>
+                <nsUserControls:EventControl x:Name="ecNew" Grid.Row="1" Margin="2" VerticalAlignment="Top" />
+                <Button Name="btnNew" Content="添加" Grid.Row="2" Width="35" Height="25" VerticalAlignment="Center" Click="btnNew_Click" />
+                <StackPanel Orientation="Horizontal" Grid.Row="3" VerticalAlignment="Center">
+                    <my:DatePicker Name="dpDay" Width="100" Margin="4" SelectedDateChanged="dpDay_SelectedDateChanged">
+                        <my:DatePicker.ToolTip>
+                            <TextBlock>
+                        <Run>更改日期不会清空下面的数据，也不会重新载入选择日期的数据</Run><LineBreak />
+                        <Run>更改后，点击更新，将更新下面数据中的日期信息。</Run>
+                            </TextBlock>
+                        </my:DatePicker.ToolTip>
+                    </my:DatePicker>
+                    <Button Name="btnUpdate" Content="更新" Width="35" Height="25" Margin="4" ToolTip="若下面列表中的内容发生了变动，可以 藉此 更新保存至文件中" Click="btnUpdate_Click" />
+                    <TextBlock Name="tblkTimeCount" Text="暂无记录" Margin="4" VerticalAlignment="Center" />
+                    <TextBlock Name="tblkBakInfo" Margin="4" VerticalAlignment="Center" Foreground="Gray" ToolTip="仅在点击更新后，执行更新操作前，备份该周数据至[PSP_Data]/bak" />
+                </StackPanel>
+
+
+                <!-- Solution 1 -->
+                <!--<ListBox Name="lbDayEvents" Grid.Row="2" Margin="2" BorderThickness="2" BorderBrush="{StaticResource lgbLightBlueInverse}" Background="Transparent"
+                 ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto"/>-->
+
+                <!-- Solution 1.5 -->
+
+                <ScrollViewer Grid.Row="4" Margin="2" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto">
+                    <DockPanel Name="dpDayEvents" LastChildFill="False" Margin="2" />
+                </ScrollViewer>
+
+                <!-- Solution 2 -->
+                <!--<my:DataGrid Name="dgDayEvents" Grid.Row="2" AutoGenerateColumns="False" Margin="4,4,4,4" BorderBrush="{Binding lgbLightBlue}">
+            <my:DataGrid.Columns>
+                <my:DataGridTextColumn Header="开始时间" Binding="{Binding time_start}" />
+                <my:DataGridTextColumn Header="结束时间" Binding="{Binding time_end}" />
+                <my:DataGridTextColumn Header="时间统计(分钟)" Binding="{Binding time_duration}" />
+                <my:DataGridTextColumn Header="所属模块" Binding="{Binding module.name}" />
+                <my:DataGridTextColumn Header="记录/日志" Binding="{Binding record}" />
+            </my:DataGrid.Columns>
+        </my:DataGrid>-->
+
+            </Grid>
+        </Expander>
+        <Expander x:Name="expandDataVC" IsExpanded="False" DockPanel.Dock="Top" Expanded="Expander_Expanded"><!-- Height="{Binding ElementName=expandDataVC, Path=ActualWidth}" -->
+            <Grid>
+                <!--<Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>-->
+                <!--<nsUserControls:StatisticsItemsVisualizationControl x:Name="tdvcTags" Margin="5" Grid.Column="0" Visibility="Collapsed" />-->
+                <nsUserControls:StatisticsItemsVisualizationControl x:Name="tdvcModules" Margin="5" Grid.Column="0" />
+            </Grid>
+        </Expander>
+    </DockPanel>
+
+</UserControl>

@@ -1,0 +1,22 @@
+﻿<UserControl x:Class="PSP.Run.Views.UserControls.SimpleTimer"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Height="23" Width="72">
+    <Border BorderThickness="1" CornerRadius="3" BorderBrush="{StaticResource lgbLightBlueInverse}">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="20" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="20" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="20" />
+            </Grid.ColumnDefinitions>
+
+            <TextBlock x:Name="tblkHour" Text="{Binding hour}" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center" />
+            <TextBlock x:Name="tblkColon1" Text=":" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" />
+            <TextBlock x:Name="tblkMinute" Text="{Binding minute}" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center" />
+            <TextBlock x:Name="tblkColon2" Text=":" Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Center" />
+            <TextBlock x:Name="tblkSecond" Text="{Binding second}" Grid.Column="4" VerticalAlignment="Center" HorizontalAlignment="Center" />
+        </Grid>
+    </Border>
+</UserControl>
